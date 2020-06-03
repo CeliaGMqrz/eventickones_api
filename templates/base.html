@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html class="wide wow-animation" lang="en"> 
+  <head>
+    <!-- Site Title-->
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <link rel="icon" href="{{url_for('static', filename = 'css/images/favicon.ico')}}" type="image/x-icon">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Oswald:200,400%7CLato:300,400,300italic,700%7CMontserrat:900">
+    <link rel="stylesheet" href="{{url_for('static', filename = 'css/bootstrap.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename = 'css/style.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename = 'css/fonts.css')}}">
+		<!--[if lt IE 10]>
+    <div style="background: #212121; padding: 10px 0; box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3); clear: both; text-align:center; position: relative; z-index:1;"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
+    <script src="js/html5shiv.min.js"> </script>
+    <![endif]--> 
+  </head>
+  <body>
+
+    <!-- Page-->
+    <div class="page"><a class="section section-banner text-center d-none d-xl-block" href="https://www.templatemonster.com/intense-multipurpose-html-template.html" <img src="{{url_for('static', filename='images/banner/foreground-04-1600x60.png')}}" alt="" width="1600" height="310"></img></a>
+      <!-- Page Header-->
+      <header class="section page-header">
+        <!-- RD Navbar-->
+        <div class="rd-navbar-wrap rd-navbar-corporate">
+          <nav class="rd-navbar" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-fullwidth" data-xl-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-fixed" data-xl-device-layout="rd-navbar-static" data-md-stick-up-offset="130px" data-lg-stick-up-offset="100px" data-stick-up="true" data-sm-stick-up="true" data-md-stick-up="true" data-lg-stick-up="true" data-xl-stick-up="true">
+            <div class="rd-navbar-collapse-toggle" data-rd-navbar-toggle=".rd-navbar-collapse"><span></span></div>
+            <div class="rd-navbar-top-panel rd-navbar-collapse novi-background">
+              <div class="rd-navbar-top-panel-inner">
+                <ul class="list-inline">
+                  <li class="box-inline list-inline-item"><span class="icon novi-icon icon-md-smaller icon-secondary mdi mdi-phone"></span>
+                    <ul class="list-comma">
+                      <li><a href="tel:#"> 000 000 000 </li>
+                    </ul>
+                  </li>
+                  <li class="box-inline list-inline-item"><span class="icon novi-icon icon-md-smaller icon-secondary mdi mdi-email"></span><a href="mailto:#">eventickones@gmail.com</a></li>
+                </ul>
+                <ul class="list-inline">
+                  <li class="list-inline-item"><a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-facebook" href="#"></a></li>
+                  <li class="list-inline-item"><a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-twitter" href="#"></a></li>
+                  <li class="list-inline-item"><a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-instagram" href="#"></a></li>
+                  <li class="list-inline-item"><a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-google-plus" href="#"></a></li>
+                  <li class="list-inline-item"><a class="icon novi-icon icon-sm-bigger icon-gray-1 mdi mdi-linkedin" href="#"></a></li>
+                </ul>
+              </div>
+              <div class="rd-navbar-top-panel-inner"><a class="button button-sm button-secondary button-nina" href="https://www.templatemonster.com/website-templates/62466.html" target="_blank">buy template now</a></div>
+            </div>
+            <div class="rd-navbar-inner">
+              <!-- RD Navbar Panel-->
+              <div class="rd-navbar-panel">
+                <!-- RD Navbar Toggle-->
+                <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
+                <!-- RD Navbar Brand-->
+                <div class="rd-navbar-brand"><a class="brand-name" href="/"><img class="logo-default" src="{{url_for('static', filename='images/social.png')}}" alt="" width="208" height="46"/><img class="logo-inverse" src="{{url_for('static', filename='images/social.png')}}" alt="" width="208" height="46"/></a></div>
+              </div>
+              <div class="rd-navbar-aside-center">
+                <div class="rd-navbar-nav-wrap">
+                  <!-- RD Navbar Nav-->
+                  <ul class="rd-navbar-nav">
+                    <li class="active"><a href="/">Inicio</a>
+                    </li>
+                    <li><a href="about-us.html">Sobre Nosotros</a>
+                    </li>
+                    <li><a href="contacts.html">Contacto</a>
+                    </li>
+                    <li><a href="typography.html">Géneros</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="rd-navbar-aside-right"><a class="button button-sm button-secondary button-nina" href="#">Book a tour now</a></div>
+            </div>
+          </nav>
+        </div>
+      </header>
+      <section class="section">
+        <div class="swiper-form-wrap">
+          <!-- Swiper-->
+          <div class="swiper-container swiper-slider swiper-slider_height-1 swiper-align-left swiper-align-left-custom context-dark bg-gray-darker" data-loop="false" data-autoplay="5500" data-simulate-touch="false" data-slide-effect="fade">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide" data-slide-bg="{{url_for('static', filename='images/swiper-slide-1.jpg')}}">
+                <div class="swiper-slide-caption">
+                  <div class="container container-bigger swiper-main-section">
+                    <div class="row row-fix justify-content-sm-center justify-content-md-start">
+                      <div class="col-md-6 col-lg-5 col-xl-4 col-xxl-5">
+                        <h3>Encuentra tus eventos favoritos</h3>
+                        <div class="divider divider-decorate"></div>
+                        <p class="text-spacing-sm">Nosotros ofrecemos información acerca de tus espectáculos favoritos</p><a class="button button-default-outline button-nina button-sm" href="#">Más info</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              
+          <div class="container container-bigger form-request-wrap form-request-wrap-modern">
+            <div class="row row-fix justify-content-sm-center justify-content-lg-end">
+              <div class="col-lg-6 col-xxl-5">
+                <div class="form-request form-request-modern bg-gray-lighter novi-background">
+                  <h4>Busca tu evento</h4>
+
+                  <!-- FORMULARIO -->
+                  <form class="rd-mailform form-fix">
+                    <div class="row row-20 row-fix">
+                      <div class="col-sm-12">
+                        <label class="form-label-outside">From</label>
+                        <div class="form-wrap form-wrap-inline">
+                          <select class="form-input select-filter" data-placeholder="All" data-minimum-results-for-search="Infinity" name="city">
+                            <option value="1">New York</option>
+                            <option value="2">Lisbon</option>
+                            <option value="3">Stockholm</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-12">
+                        <label class="form-label-outside">To</label>
+                        <div class="form-wrap form-wrap-inline">
+                          <select class="form-input select-filter" data-placeholder="All" data-minimum-results-for-search="Infinity" name="city">
+                            <option value="1">Chicago</option>
+                            <option value="2">Madrid</option>
+                            <option value="3">Paris</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-lg-6">
+                        <label class="form-label-outside">Depart Date</label>
+                        <div class="form-wrap form-wrap-validation">
+                          <!-- Select -->
+                          <input class="form-input" id="dateForm" name="date" type="text" data-time-picker="date">
+                          <label class="form-label" for="dateForm">Choose the date</label>
+                          <!--select.form-input.select-filter(data-placeholder="All", data-minimum-results-for-search="Infinity",  name='city')-->
+                          <!--  option(value="1") Choose the date-->
+                          <!--  option(value="2") Primary-->
+                          <!--  option(value="3") Middle-->
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-lg-6">
+                        <label class="form-label-outside">Duration</label>
+                        <div class="form-wrap form-wrap-validation">
+                          <!-- Select 2-->
+                          <select class="form-input select-filter" data-placeholder="All" data-minimum-results-for-search="Infinity" name="city">
+                            <option value="1">Any length</option>
+                            <option value="2">2 days</option>
+                            <option value="3">3 days</option>
+                            <option value="4">4 days</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <label class="form-label-outside">Adults</label>
+                        <div class="form-wrap form-wrap-modern">
+                          <input class="form-input input-append" id="form-element-stepper" type="number" min="0" max="300" value="2">
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <label class="form-label-outside">Children</label>
+                        <div class="form-wrap form-wrap-modern">
+                          <input class="form-input input-append" id="form-element-stepper-1" type="number" min="0" max="300" value="0">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-wrap form-button">
+                      <button class="button button-block button-secondary" type="submit">search flight</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-variant-1 bg-default novi-background bg-cover"> 
+        <div class="container container-wide">
+          <div class="row row-fix justify-content-xl-end row-30 text-center text-xl-left">
+            <div class="col-xl-8">
+              <div class="parallax-text-wrap">
+                <h3>Los eventos más populares</h3><span class="parallax-text">LO MÁS</span>
+              </div>
+              <hr class="divider divider-decorate">
+            </div>
+            <div class="col-xl-3 text-xl-right"><a class="button button-secondary button-nina" href="#">LISTA DE EVENTOS</a></div>
+          </div>
+          <div class="row row-50">
+            <div class="col-md-6 col-xl-4">
+              <article class="event-default-wrap">
+                <div class="event-default">
+                  <figure class="event-default-image"><img src="{{url_for('static', filename='images/landing-private-airlines-01-570x370.jpg')}}" alt="" width="570" height="370"/>
+                  </figure>
+                  <div class="event-default-caption"><a class="button button-xs button-secondary button-nina" href="#">learn more</a></div>
+                </div>
+                <div class="event-default-inner">
+                  <h5><a class="event-default-title" href="#">France, Paris</a></h5><span class="heading-5">from $280</span>
+                </div>
+              </article>
+            </div>
+            <div class="col-md-6 col-xl-4">
+              <article class="event-default-wrap">
+                <div class="event-default">
+                  <figure class="event-default-image"><img src="{{url_for('static', filename='images/landing-private-airlines-02-570x370.jpg')}}" alt="" width="570" height="370"/>
+                  </figure>
+                  <div class="event-default-caption"><a class="button button-xs button-secondary button-nina" href="#">learn more</a></div>
+                </div>
+                <div class="event-default-inner">
+                  <h5><a class="event-default-title" href="#">USA, Boston</a></h5><span class="heading-5">from $480</span>
+                </div>
+              </article>
+            </div>
+            <div class="col-md-6 col-xl-4">
+              <article class="event-default-wrap">
+                <div class="event-default">
+                  <figure class="event-default-image"><img src="{{url_for('static', filename='images/landing-private-airlines-03-570x370.jpg')}}" alt="" width="570" height="370"/>
+                  </figure>
+                  <div class="event-default-caption"><a class="button button-xs button-secondary button-nina" href="#">learn more</a></div>
+                </div>
+                <div class="event-default-inner">
+                  <h5><a class="event-default-title" href="#">Italy, Venice</a></h5><span class="heading-5">from $350</span>
+                </div>
+              </article>
+            </div>
+            <div class="col-md-6 col-xl-4">
+              <article class="event-default-wrap">
+                <div class="event-default">
+                  <figure class="event-default-image"><img src="{{url_for('static', filename='images/landing-private-airlines-04-570x370.jpg')}}" alt="" width="570" height="370"/>
+                  </figure>
+                  <div class="event-default-caption"><a class="button button-xs button-secondary button-nina" href="#">learn more</a></div>
+                </div>
+                <div class="event-default-inner">
+                  <h5><a class="event-default-title" href="#">Spain, Benidorm</a></h5><span class="heading-5">from $350</span>
+                </div>
+              </article>
+            </div>
+            <div class="col-md-6 col-xl-4">
+              <article class="event-default-wrap">
+                <div class="event-default">
+                  <figure class="event-default-image"><img src="{{url_for('static', filename='images/landing-private-airlines-05-570x370.jpg')}}" alt="" width="570" height="370"/>
+                  </figure>
+                  <div class="event-default-caption"><a class="button button-xs button-secondary button-nina" href="#">learn more</a></div>
+                </div>
+                <div class="event-default-inner">
+                  <h5><a class="event-default-title" href="#">Egypt,  Sharm El Sheikh</a></h5><span class="heading-5">from $520</span>
+                </div>
+              </article>
+            </div>
+            <div class="col-md-6 col-xl-4">
+              <article class="event-default-wrap">
+                <div class="event-default">
+                  <figure class="event-default-image"><img src="{{url_for('static', filename='images/landing-private-airlines-06-570x370.jpg')}}" alt="" width="570" height="370"/>
+                  </figure>
+                  <div class="event-default-caption"><a class="button button-xs button-secondary button-nina" href="#">learn more</a></div>
+                </div>
+                <div class="event-default-inner">
+                  <h5><a class="event-default-title" href="#">UK, London</a></h5><span class="heading-5">from $600</span>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- our advantages-->
+      <section class="section section-lg bg-gray-lighter novi-background bg-cover text-center">
+        <div class="container container-wide">
+          <h3>NUESTROS SERVICIOS</h3>
+          <div class="divider divider-decorate"></div>
+          <div class="row row-50 justify-content-sm-center text-left">
+            <div class="col-sm-10 col-md-6 col-xl-3">
+              <article class="box-minimal box-minimal-border">
+                <div class="box-minimal-icon novi-icon mdi mdi-airplane"></div>
+                <p class="big box-minimal-title">Búsqueda por artista o cantante</p>
+                <hr>
+                <div class="box-minimal-text text-spacing-sm">Introduce una palabra clave o algo relacionado con tu artista o cantante favorito.</div>
+              </article>
+            </div>
+            <div class="col-sm-10 col-md-6 col-xl-3">
+              <article class="box-minimal box-minimal-border">
+                <div class="box-minimal-icon novi-icon mdi mdi-map"></div>
+                <p class="big box-minimal-title">Búsqueda por lugar y localización en el mapa</p>
+                <hr>
+                <div class="box-minimal-text text-spacing-sm">Te mostramos cada evento según el lugar que indiques, y localizamos el lugar en el mapa.</div>
+              </article>
+            </div>
+            <div class="col-sm-10 col-md-6 col-xl-3">
+              <article class="box-minimal box-minimal-border">
+                <div class="box-minimal-icon novi-icon mdi mdi-city"></div>
+                <p class="big box-minimal-title">Descubre eventos más populares en diferentes géneros</p>
+                <hr>
+                <div class="box-minimal-text text-spacing-sm">Actualizamos cada semana para enseñarte los eventos más populares por género.</div>
+              </article>
+            </div>
+            <div class="col-sm-10 col-md-6 col-xl-3">
+              <article class="box-minimal box-minimal-border">
+                <div class="box-minimal-icon novi-icon mdi mdi-beach"></div>
+                <p class="big box-minimal-title">Te facilitamos la url para comprar tu entrada</p>
+                <hr>
+                <div class="box-minimal-text text-spacing-sm">Lo más importante!! NO TE QUEDES SIN TU ENTRADA!!.</div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer Minimal-->
+      <footer class="section page-footer page-footer-minimal novi-background bg-cover text-center bg-gray-darker">
+        <div class="container container-wide">
+          <div class="row row-fix justify-content-sm-center align-items-md-center row-30">
+            <div class="col-md-10 col-lg-7 col-xl-4 text-xl-left"><a href="/"><img class="inverse-logo" src="{{url_for('static', filename='images/social.png')}}" alt="" width="208" height="46"/></a></div>
+            <div class="col-md-10 col-lg-7 col-xl-4">
+              <p class="right">&#169;&nbsp;<span class="copyright-year"></span> All Rights Reserved. Design&nbsp;by&nbsp;<a href="https://www.templatemonster.com">TemplateMonster</a></p>
+            </div>
+            <div class="col-md-10 col-lg-7 col-xl-4 text-xl-right">
+              <ul class="group-xs group-middle"> 
+                <li><a class="icon novi-icon icon-md-middle icon-circle icon-secondary-5-filled mdi mdi-facebook" href="#"></a></li>
+                <li><a class="icon novi-icon icon-md-middle icon-circle icon-secondary-5-filled mdi mdi-twitter" href="#"></a></li>
+                <li><a class="icon novi-icon icon-md-middle icon-circle icon-secondary-5-filled mdi mdi-instagram" href="#"></a></li>
+                <li><a class="icon novi-icon icon-md-middle icon-circle icon-secondary-5-filled mdi mdi-google" href="#"></a></li>
+                <li><a class="icon novi-icon icon-md-middle icon-circle icon-secondary-5-filled mdi mdi-linkedin" href="#"></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <!-- Global Mailform Output-->
+    <div class="snackbars" id="form-output-global"> </div>
+    <!-- Javascript-->
+    <script src="{{url_for('static', filename='js/core.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/script.js')}}"></script>
+    <!-- coded by barber-->
+  </body>
+</html>
