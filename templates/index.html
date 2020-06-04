@@ -1,2 +1,59 @@
 {% extends "base.html" %}
 {% block title %}EvenTickOnes{% endblock %}
+{%block contenido%}
+<div class="container container-bigger form-request-wrap form-request-wrap-modern">
+    <div class="row row-fix justify-content-sm-center justify-content-lg-end">
+      <div class="col-lg-6 col-xxl-5">
+        <div class="form-request form-request-modern bg-gray-lighter novi-background">
+          <h4>Busca tu evento</h4>
+
+          <!-- FORMULARIO -->
+          <form class="rd-mailform form-fix">
+            <div class="row row-20 row-fix">
+              <div class="col-sm-12">
+                <label class="form-label-outside">PAÍS</label>
+                <div class="form-wrap form-wrap-inline">
+                  <select class="form-input select-filter" data-placeholder="All" data-minimum-results-for-search="Infinity" name="pais">
+                    {% if paises %}
+                    <option>Todos</option>
+                    {% for elem in paises -%}
+                    {% if elem == pais %}
+                    <option value= "{{elem}}" selected="selected">{{elem.title()}}</option>
+                    {% else %}
+                    <option value= "{{elem}}">{{elem.title()}}</option>
+                    {% endif %}
+                    {% endfor -%}
+                    {% endif %}
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <label class="form-label-outside">ARTISTA</label>
+                <div class="form-wrap form-wrap-inline">
+                  <input class="form-input select-filter" type="text" name="name" placeholder="Pon aquí la palabra clave"/>
+                </div>
+              </div>
+              <div class="col-sm-12 col-lg-6">
+                <label class="form-label-outside">GÉNERO</label>
+                <div class="form-wrap form-wrap-validation">
+                  <!-- Select 2-->
+                  <select class="form-input select-filter" data-placeholder="All" data-minimum-results-for-search="Infinity" name="city">
+                    <option value="1">Todos</option>
+                    <option value="2">POP</option>
+                    <option value="3">ROCK</option>
+                    <option value="4">HIPHOP</option>
+                  </select>
+                </div>
+              </div>
+              </div>
+              <div class="col-sm-12 col-lg-6">
+              </div>
+            </div>
+            <div class="form-wrap form-button">
+              <button class="button button-block button-secondary" type="submit">BUSCAR</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+{%endblock%}
