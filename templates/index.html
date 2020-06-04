@@ -33,18 +33,6 @@
                   <input class="form-input select-filter" type="text" name="name" placeholder="Pon aquí la palabra clave"/>
                 </div>
               </div>
-              <div class="col-sm-12 col-lg-6">
-                <label class="form-label-outside">GÉNERO</label>
-                <div class="form-wrap form-wrap-validation">
-                  <!-- Select 2-->
-                  <select class="form-input select-filter" data-placeholder="All" data-minimum-results-for-search="Infinity" name="city">
-                    <option value="1">Todos</option>
-                    <option value="2">POP</option>
-                    <option value="3">ROCK</option>
-                    <option value="4">HIPHOP</option>
-                  </select>
-                </div>
-              </div>
               </div>
               <div class="col-sm-12 col-lg-6">
               </div>
@@ -56,4 +44,27 @@
         </div>
       </div>
     </div>
-{%endblock%}
+
+
+{% if filtro %}
+<section class="section section-lg bg-default">
+    <div class="container">
+      <div class="row row-50 row-fix">
+        <div class="col-lg-10 col-xl-8">
+          <h3>LISTA DE EVENTOSt</h3>
+          <p>Aquí se muestran la lista de eventos que hemos encontrado</p>
+        {% for elem in filtro -%}
+            {% if elem[0] %}
+          <ul class="list-marked">
+            <li>{{elem[0]}}</li>
+            <li>{{elem[1]}}</li>
+          </ul>
+          {% endif %}
+        {%endfor -%}
+          <p>Puedes pasar de página en este boton (PONER UN BOTÓN).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endif %}
+{% endblock %}
