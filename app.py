@@ -30,7 +30,7 @@ def eventos():
     #Cogemos el país seleccionado en el formulario
     pais=request.form.get("pais")
     #Creamos el diccionario con los parámetros necesarios
-    payload = {'apikey':key,'keyword':palabra_clave}
+    payload = {'apikey':key,'keyword':palabra_clave,'countryCode':pais}
     #Guardamos la petición en una variable(urlbase + diccionario con parametros)
     r=requests.get(url_base+'events',params=payload)
 
@@ -43,10 +43,6 @@ def eventos():
     if r.status_code == 200:
         #Guardamos el contenido de la petición1 
         contenido = r.json()
-		
-
-
-
         #Si el método por el que se accede es GET devuelve la página principal con la lista de paises para el desplegable.
         if request.method=="GET":
             return render_template("index.html",paises=lista_paises)
@@ -61,10 +57,10 @@ def eventos():
             pais=request.form.get("pais")
             palabra_clave=request.form.get("artista")
 			
-	        # Si la palabra clave no está en la variable guardada imprime un mensaje
+	        # Si no existe contenido devuelve un mensaje
             noms=[]
             if "_embedded" not in contenido:
-                mensaje=("No hay eventos para esa búsqueda")
+                mensaje=("No hay eventos para esa búsqueda  ☹ ")
                 return render_template("index.html",mensaje=mensaje,palabra_clave=palabra_clave,paises=lista_paises)
             else:
 			    #Creamos las listas que necesitamos
@@ -77,7 +73,9 @@ def eventos():
                 paises=[]
                 urls=[]
                 urls_sala=[]
-    
+                #Contabilizamos el número de coincidencias
+                coincidencias=0
+                #Guardar contenido en listas
                 for elem in contenido["_embedded"]["events"]:
                     #NOMBRES
                     nombres.append(elem["name"])
@@ -95,8 +93,14 @@ def eventos():
                         direccion.append(elem["_embedded"]["venues"][0]["address"]["line1"])
                     else:
                         direccion.append("NO ESPECIFICADA")
-                    #FECHAS
+                    #FECHAS CON CAMBIO DE FORMATO
                     fechas.append(elem["dates"]["start"]["localDate"])
+                    fechas_cambiadas=[]
+                    fecha_str=[]
+                    for fecha in fechas:
+                        fechas_cambiadas.append(datetime.strptime(fecha, '%Y-%m-%d'))
+                    for fecha in fechas_cambiadas:
+                        fecha_str.append(datetime.strftime(fecha, '%d/%m/%Y'))
                     #HORAS: A veces la hora no esta especificada así que nos aseguramos de ello.
                     if "localTime" in elem["dates"]["start"]:
                         horas.append(elem["dates"]["start"]["localTime"])
@@ -104,9 +108,15 @@ def eventos():
                         horas.append("NO ESPECIFICADA")
                     #URLS
                     urls.append(elem["url"])
-                    urls_sala.append(elem["_embedded"]["venues"][0]["url"])
-                filtro=zip(nombres,paises,ciudades,salas,direccion,fechas,horas,urls,urls_sala)
-                return render_template("index.html",filtro=filtro,palabra_clave=palabra_clave,paises=lista_paises)
+                    if elem["url"]:
+                        coincidencias=coincidencias+1
+                    if "url" in elem["_embedded"]["venues"][0]:
+                        urls_sala.append(elem["_embedded"]["venues"][0]["url"])
+                    else:
+                        urls_sala.append("NO ESPECIFICADA")
+                        
+                filtro=zip(nombres,paises,ciudades,salas,direccion,fecha_str,horas,urls,urls_sala)
+                return render_template("index.html",filtro=filtro,palabra_clave=palabra_clave,paises=lista_paises,coincidencias=coincidencias,pais=pais)
     else:
         abort(404)
 

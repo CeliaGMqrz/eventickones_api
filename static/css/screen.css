@@ -307,9 +307,8 @@ hr {
 
 .container-table100 {
   width: 100%;
-  min-height: 100vh;
+  min-height: 55vh;
   background: #fff;
-
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -411,7 +410,7 @@ th, td {
 }
 
 .table100.ver1 .table100-body tr:nth-child(even) {
-  background-color: #f8f6ff;
+  background-color: #000000;
 }
 
 /*---------------------------------------------*/

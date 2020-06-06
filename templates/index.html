@@ -39,8 +39,12 @@
           <!-- Title -->
             <div class="section-title">
                <div class="container">
-                  <h2 class="title">EVENTOS ENCONTRADOS</h2>
-                  <p class="sub-title">Se han econtrado n coincidencias</p>
+                  <h2 class="title">¡Estás de suerte!</h2>
+               {% if coincidencias > 1%}
+                  <p class="sub-title">Se han encontrado {{coincidencias}} coincidencias.</p>
+               {% else %}
+                  <p class="sub-title">Se ha encontrado solo {{coincidencias}} coincidencia.</p>
+               {% endif %}
                </div>
                   <!--Table-->
                   <div class="limiter">
@@ -56,6 +60,7 @@
                                           <th class="cell100 column3">Hora</th>
                                           <th class="cell100 column4">Sala</th>
                                           <th class="cell100 column4">Más info</th>
+
                                        </tr>
                                     </thead>
                                  </table>
@@ -71,7 +76,7 @@
                                           <td class="cell100 column2">{{elem[5]}}</td>
                                           <td class="cell100 column3">{{elem[6]}}</td>
                                           <td class="cell100 column4">{{elem[3]}}</td>
-                                          <td class="cell100 column4">{{elem[8]}}</th>
+                                          <td class="cell100 column4"><u><a href="{{elem[8]}}">+ INFO</a></u></td>
                                        </tr>
                                        {% endif %}
                                     {% endfor -%}
@@ -84,17 +89,17 @@
                   </div>
             </div>
             <div class="align-center">
-               <a href="/" class="btn btn-default btn-load-destination"><span class="text">Volver arriba</span><i class="icon-spinner6"></i></a>
+               <a href="/" action="/" class="btn btn-default btn-load-destination"><span class="text">Volver arriba</span><i class="icon-spinner6"></i></a>
             </div>
          </div>
       </section>
-   {% else %}
+   {% elif mensaje %}
    <section class="section section-destination">
       <!-- Title -->
         <div class="section-title">
            <div class="container">
-              <h2 class="title">EVENTOS ENCONTRADOS</h2>
-              <p class="sub-title"><strong>{{mensaje}}</strong></p>
+              <h2 class="title">LO SENTIMOS ...</h2>
+              <p class="title"><strong>{{mensaje}}</strong></p>
            </div>
         </div>   
    </section>
