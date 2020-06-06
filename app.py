@@ -73,8 +73,11 @@ def eventos():
                 paises=[]
                 urls=[]
                 urls_sala=[]
+                fechas_cambiadas=[]
+                fecha_str=[]
                 #Contabilizamos el número de coincidencias
                 coincidencias=0
+                pais=request.form.get("pais")
                 #Guardar contenido en listas
                 for elem in contenido["_embedded"]["events"]:
                     #NOMBRES
@@ -95,8 +98,6 @@ def eventos():
                         direccion.append("NO ESPECIFICADA")
                     #FECHAS CON CAMBIO DE FORMATO
                     fechas.append(elem["dates"]["start"]["localDate"])
-                    fechas_cambiadas=[]
-                    fecha_str=[]
                     for fecha in fechas:
                         fechas_cambiadas.append(datetime.strptime(fecha, '%Y-%m-%d'))
                     for fecha in fechas_cambiadas:
@@ -116,6 +117,7 @@ def eventos():
                         urls_sala.append("NO ESPECIFICADA")
                         
                 filtro=zip(nombres,paises,ciudades,salas,direccion,fecha_str,horas,urls,urls_sala)
+                
                 return render_template("index.html",filtro=filtro,palabra_clave=palabra_clave,paises=lista_paises,coincidencias=coincidencias,pais=pais)
     else:
         abort(404)

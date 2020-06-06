@@ -15,9 +15,9 @@
                   <form class="destinations-form" method="post" action="/">
                      <div class="input-line">
                         <input type="text" name="artista" class="form-input check-value" placeholder="Escribe alguna palabra clave" value="{{palabra_clave}}" />
-                        <select name= "pais">
+                        <select class="input-line" name="pais" id="pais">
                            {% if paises %}
-                           <option>Todos</option>
+                           <option value="{{Todos}}">Todos</option>
                            {% for elem in paises -%}
                            {% if elem == pais %}
                            <option value= "{{elem}}" selected="selected">{{elem.upper()}}</option>
@@ -27,7 +27,7 @@
                            {% endfor -%}
                            {% endif %}
                         </select>
-                        <button type="button" name="destination-submit" class="form-submit btn btn-special">Buscar</button>
+                        <button type="submit" name="destinations-form" class="form-submit btn btn-special" action="/">Buscar</button>
                      </div>
                   </form>
                </div>
@@ -39,11 +39,20 @@
           <!-- Title -->
             <div class="section-title">
                <div class="container">
+               {% if coincidencias > 0 %}
                   <h2 class="title">¡Estás de suerte!</h2>
-               {% if coincidencias > 1%}
                   <p class="sub-title">Se han encontrado {{coincidencias}} coincidencias.</p>
+               {% elif coincidencias == 1 %}
+                  <h2 class="title">¡Estás de suerte!</h2>
+                  <p class="sub-title">Se ha encontrado {{coincidencias}} coincidencia.</p>
                {% else %}
-                  <p class="sub-title">Se ha encontrado solo {{coincidencias}} coincidencia.</p>
+                  <!-- Title -->
+                    <div class="section-title">
+                       <div class="container">
+                          <h2 class="title">LO SENTIMOS ...</h2>
+                          <p class="title"><strong>NO SE HAN ENCONTRADO COINCIDENCIAS</strong></p>
+                       </div>
+                    </div>   
                {% endif %}
                </div>
                   <!--Table-->
@@ -58,7 +67,7 @@
                                           <th class="cell100 column1">Artista</th>
                                           <th class="cell100 column2">Fecha</th>
                                           <th class="cell100 column3">Hora</th>
-                                          <th class="cell100 column4">Sala</th>
+                                          <th class="cell100 column4">Ciudad</th>
                                           <th class="cell100 column4">Más info</th>
 
                                        </tr>
@@ -75,7 +84,7 @@
                                           <td class="cell100 column1">{{elem[0]}}</td>
                                           <td class="cell100 column2">{{elem[5]}}</td>
                                           <td class="cell100 column3">{{elem[6]}}</td>
-                                          <td class="cell100 column4">{{elem[3]}}</td>
+                                          <td class="cell100 column4">{{elem[2]}}</td>
                                           <td class="cell100 column4"><u><a href="{{elem[8]}}">+ INFO</a></u></td>
                                        </tr>
                                        {% endif %}
