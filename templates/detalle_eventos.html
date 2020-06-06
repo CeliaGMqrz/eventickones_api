@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}INFORMACIÓN DEL EVENTO{% endblock %}
+{% block contenido %} 
+         <!-- Destinations Section -->
+        <section class="section section-destination">
+          <!-- Title -->
+            <div class="section-title">
+               <div class="container">
+                  {% for elem in filtro -%}   
+                  <h2 class="title">INFORMACIÓN DEL EVENTO: {{elem[0]}}</h2>
+                  <ul class="text align-center">
+                      <li>Nombre: {{elem[0]}}</li>
+                      <li>País: {{elem[1]}}</li>
+                      <li>Ciudad: {{elem[2]}}</li>
+                      <li>Sala: {{elem[3]}}</li>
+                      <li>Dirección: {{elem[4]}}</li>
+                      <li>Fecha: {{elem[5]}}</li>
+                      <li>Hora: {{elem[6]}}</li>
+                      <li>url {{elem[7]}}</li>
+                      <li>url_sala: {{elem[8]}}</li>
+                  </ul>
+                  {% endfor -%}
+               </div>
+            </div>   
+        </section>
+{% endblock %}
+

@@ -69,7 +69,7 @@
                                           <th class="cell100 column2">Hora</th>
                                           <th class="cell100 column3">País</th>
                                           <th class="cell100 column4">Ciudad</th>
-                                          <th class="cell100 column4">Más info</th>
+                                          <th class="cell100 column4">Entradas</th>
 
                                        </tr>
                                     </thead>
@@ -82,12 +82,12 @@
                                     {% for elem in filtro -%}
                                        {% if elem [0] and elem[1] %}
                                        <tr class="row100 body">
-                                          <td class="cell100 column1">{{elem[0]}}</td>
+                                          <td class="cell100 column1"><u><a href="/evento/{{elem[9]}}">{{elem[0]}}</a></u></td>
                                           <td class="cell100 column2">{{elem[5]}}</td>
                                           <td class="cell100 column3">{{elem[6]}}</td>
                                           <td class="cell100 column3">{{elem[1]}}</td>
                                           <td class="cell100 column4">{{elem[2]}}</td>
-                                          <td class="cell100 column4"><u><a href="{{elem[7]}}">+ INFO</a></u></td>
+                                          <td class="cell100 column4"><u><a href="{{elem[7]}}">Ver entrada</a></u></td>
                                        </tr>
                                        {% endif %}
                                     {% endfor -%}
