@@ -1,70 +1,102 @@
 {% extends "base.html" %}
 {% block title %}EvenTickOnes{% endblock %}
-{%block contenido%}
-<div class="container container-bigger form-request-wrap form-request-wrap-modern">
-    <div class="row row-fix justify-content-sm-center justify-content-lg-end">
-      <div class="col-lg-6 col-xxl-5">
-        <div class="form-request form-request-modern bg-gray-lighter novi-background">
-          <h4>Busca tu evento</h4>
+{% block contenido %} 
+      <!-- Main Content -->
+      <div class="content-box">
+         <!-- Hero Section -->
+         <section class="section section-hero">
+            <div class="hero-box">
+               <div class="container">
+                  <div class="hero-text align-center">
+                     <h1>¡Busca tus entradas!</h1>
+                     <p>Encuentra tu evento</p>
+                  </div>
 
-          <!-- FORMULARIO -->
-          <form class="rd-mailform form-fix">
-            <div class="row row-20 row-fix">
-              <div class="col-sm-12">
-                <label class="form-label-outside">PAÍS</label>
-                <div class="form-wrap form-wrap-inline">
-                  <select class="form-input select-filter" data-placeholder="All" data-minimum-results-for-search="Infinity" name="pais">
-                    {% if paises %}
-                    <option>Todos</option>
-                    {% for elem in paises -%}
-                    {% if elem == pais %}
-                    <option value= "{{elem}}" selected="selected">{{elem.title()}}</option>
-                    {% else %}
-                    <option value= "{{elem}}">{{elem.title()}}</option>
-                    {% endif %}
-                    {% endfor -%}
-                    {% endif %}
-                  </select>
-                </div>
-              </div>
-              <div class="col-sm-12">
-                <label class="form-label-outside">ARTISTA</label>
-                <div class="form-wrap form-wrap-inline">
-                  <input class="form-input select-filter" type="text" name="name" placeholder="Pon aquí la palabra clave"/>
-                </div>
-              </div>
-              </div>
-              <div class="col-sm-12 col-lg-6">
-              </div>
+                  <form class="destinations-form" method="post" action="/">
+                     <div class="input-line">
+                        <input type="text" name="artista" class="form-input check-value" placeholder="Escribe alguna palabra clave" value="{{palabra_clave}}" />
+                        <select name= "pais">
+                           {% if paises %}
+                           <option>Todos</option>
+                           {% for elem in paises -%}
+                           {% if elem == pais %}
+                           <option value= "{{elem}}" selected="selected">{{elem.upper()}}</option>
+                           {% else %}
+                           <option value= "{{elem}}">{{elem.upper()}}</option>
+                           {% endif %}
+                           {% endfor -%}
+                           {% endif %}
+                        </select>
+                        <button type="button" name="destination-submit" class="form-submit btn btn-special">Buscar</button>
+                     </div>
+                  </form>
+               </div>
             </div>
-            <div class="form-wrap form-button">
-              <button class="button button-block button-secondary" type="submit">BUSCAR</button>
+         </section>
+   {% if filtro %}
+         <!-- Destinations Section -->
+         <section class="section section-destination">
+          <!-- Title -->
+            <div class="section-title">
+               <div class="container">
+                  <h2 class="title">EVENTOS ENCONTRADOS</h2>
+                  <p class="sub-title">Se han econtrado n coincidencias</p>
+               </div>
+                  <!--Table-->
+                  <div class="limiter">
+                     <div class="container-table100">
+                        <div class="wrap-table100">
+                           <div class="table100 ver1 m-b-110">
+                              <div class="table100-head">
+                                 <table>
+                                    <thead>
+                                       <tr class="row100 head">
+                                          <th class="cell100 column1">Artista</th>
+                                          <th class="cell100 column2">Fecha</th>
+                                          <th class="cell100 column3">Hora</th>
+                                          <th class="cell100 column4">Sala</th>
+                                          <th class="cell100 column4">Más info</th>
+                                       </tr>
+                                    </thead>
+                                 </table>
+                              </div>
+                           
+                              <div class="table100-body js-pscroll">
+                                 <table>
+                                    <tbody>
+                                    {% for elem in filtro -%}
+                                       {% if elem [0] and elem[1] %}
+                                       <tr class="row100 body">
+                                          <td class="cell100 column1">{{elem[0]}}</td>
+                                          <td class="cell100 column2">{{elem[5]}}</td>
+                                          <td class="cell100 column3">{{elem[6]}}</td>
+                                          <td class="cell100 column4">{{elem[3]}}</td>
+                                          <td class="cell100 column4">{{elem[8]}}</th>
+                                       </tr>
+                                       {% endif %}
+                                    {% endfor -%}
+                                    </tbody>
+                                 </table>
+                              </div>
+                           </div>
+                         </div>
+                     </div>
+                  </div>
             </div>
-          </form>
-        </div>
-      </div>
-    </div>
-
-
-{% if filtro %}
-<section class="section section-lg bg-default">
-    <div class="container">
-      <div class="row row-50 row-fix">
-        <div class="col-lg-10 col-xl-8">
-          <h3>LISTA DE EVENTOSt</h3>
-          <p>Aquí se muestran la lista de eventos que hemos encontrado</p>
-        {% for elem in filtro -%}
-            {% if elem[0] %}
-          <ul class="list-marked">
-            <li>{{elem[0]}}</li>
-            <li>{{elem[1]}}</li>
-          </ul>
-          {% endif %}
-        {%endfor -%}
-          <p>Puedes pasar de página en este boton (PONER UN BOTÓN).</p>
-        </div>
-      </div>
-    </div>
-  </section>
-{% endif %}
+            <div class="align-center">
+               <a href="/" class="btn btn-default btn-load-destination"><span class="text">Volver arriba</span><i class="icon-spinner6"></i></a>
+            </div>
+         </div>
+      </section>
+   {% else %}
+   <section class="section section-destination">
+      <!-- Title -->
+        <div class="section-title">
+           <div class="container">
+              <h2 class="title">EVENTOS ENCONTRADOS</h2>
+              <p class="sub-title"><strong>{{mensaje}}</strong></p>
+           </div>
+        </div>   
+   </section>
+   {% endif %}
 {% endblock %}

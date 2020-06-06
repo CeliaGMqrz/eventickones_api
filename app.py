@@ -11,122 +11,104 @@ import os
 import json
 #Importar las fechas
 from datetime import datetime
-
+#Abrimos el fichero json donde están los paises que quiero que aparezca en mi desplegable
+#y lo guardamos en infoÇ_paises
 with open("paises.json") as fichero:
-    info=json.load(fichero)
-
-
+    info_paises=json.load(fichero)
 
 # Definimos la variable app por Flask
 app = Flask(__name__)
 #Guardamos la url base
 url_base="https://app.ticketmaster.com/discovery/v2/"
 
-#Funcion que devuelve datos según el artista
-def ev_artista (palabra_clave):
-		    #Creamos el diccionario con los parámetros necesarios
-		    payload = {'apikey':key,'keyword':palabra_clave}
-		    #Guardamos la petición en una variable(urlbase + diccionario con parametros)
-		    r=requests.get(url_base+'events',params=payload)
-		    #Inicializamos las listas necesarias
-		    nombres=[]
-		    fechas=[]
-		    horas=[]
-		    salas=[]
-		    direccion=[]
-		    ciudades=[]
-		    paises=[]
-		    urls=[]
-		    urls_sala=[]
-		    numelementos=0
-		    #Comprobamos que la peticion es correcta
-		    if r.status_code == 200:
-		        url_gestionada=r.url
-		        #Guardamos el contenido en json
-		        contenido = r.json()
-		        # Si la palabra clave no está en la variable guardada imprime un mensaje
-		        noms=[]
-		        for i in contenido["_embedded"]["events"]:
-		            noms.append(i["name"])
-		        for nombre in noms:
-		            if palabra_clave.upper() not in nombre.upper():
-		                mensaje=("No hay eventos para esa búsqueda")
-		                return mensaje
-		        else:
-		            #Para cada elemento en el contenido añadimos la informacion a las listas
-		            for elem in contenido["_embedded"]["events"]:
-		                #NOMBRES
-		                nombres.append(elem["name"])
-		                #CIUDADES
-		                ciudades.append(elem["_embedded"]["venues"][0]["city"]["name"])
-		                #PAISES
-		                paises.append(elem["_embedded"]["venues"][0]["country"]["name"])
-		                #SALAS
-		                salas.append(elem["_embedded"]["venues"][0]["name"])
-		                #DIRECCIONES
-		                if "address" in elem["_embedded"]["venues"][0]:
-		                    direccion.append(elem["_embedded"]["venues"][0]["address"]["line1"])
-		                else:
-		                    direccion.append("NO ESPECIFICADA")
-		                #FECHAS
-		                fechas.append(elem["dates"]["start"]["localDate"])
-		                #HORAS: A veces la hora no esta especificada así que nos aseguramos de ello.
-		                if "localTime" in elem["dates"]["start"]:
-		                    horas.append(elem["dates"]["start"]["localTime"])
-		                else:
-		                    horas.append("NO ESPECIFICADA")
-		                #URLS
-		                urls.append(elem["url"])
-		                urls_sala.append(elem["_embedded"]["venues"][0]["url"])
-		                if elem["_embedded"]["venues"][0]["url"]:
-		                    numelementos=numelementos+1
-		            filtro=[nombres,paises,ciudades,salas,direccion,fechas,horas,urls,urls_sala,numelementos]
-		        return filtro
-
-
-
-
-# Definimos la ruta principal de la página de incio 
 @app.route('/',methods=["GET","POST"])
-def inicio():
+def eventos():
     #En una variable key, guardamos por el diccionario os.environ nuestra key
     key=os.environ["apikey"]
+    #La palabra clave la sacamos del formulario del index.html
+    palabra_clave=request.form.get("artista")
+    #Cogemos el país seleccionado en el formulario
+    pais=request.form.get("pais")
     #Creamos el diccionario con los parámetros necesarios
-    payload = {'apikey':key}
+    payload = {'apikey':key,'keyword':palabra_clave}
     #Guardamos la petición en una variable(urlbase + diccionario con parametros)
     r=requests.get(url_base+'events',params=payload)
-    #Guardamos los paises a partir del fichero json
-    paises=[]
-    for i in info:
-        paises.append(str(i))
-    #Si el método por el que accedimos es GET:
+
+    #Guardamos los paises a partir del fichero json, de forma que nos quedamos solo con los codigos de los paises
+    lista_paises=[]
+    for i in info_paises:
+        lista_paises.append(str(i[:2]))
+
+	#Comprobamos que la petición genera un 200
     if r.status_code == 200:
-        #Guardamos el contenido en json
+        #Guardamos el contenido de la petición1 
         contenido = r.json()
+		
+
+
+
+        #Si el método por el que se accede es GET devuelve la página principal con la lista de paises para el desplegable.
         if request.method=="GET":
-            return render_template("index.html", paises=paises)
+            return render_template("index.html",paises=lista_paises)
+        #Si el método por el que se accede es un POST cogemos la información dependiendo de los parametros indicados por el usuario.
         else:
             try:
-                artista=request.form.get("name")
+                palabra_clave=request.form.get("artista")
             except:
                 abort(404)
 
+            #Recogemos los parámetros del formulario
             pais=request.form.get("pais")
-
-            #Función que recibe el nombre del artista y devuelve todos los eventos proximos del mismo
-            #Si lo que devuelve la funcion no es una lista devuelve un mensaje.
-            if type(ev_artista(artista)) != list:
-                return render_template("index.html", mensaje=(ev_artista(artista)))
-            #Si no, impime el contenido
+            palabra_clave=request.form.get("artista")
+			
+	        # Si la palabra clave no está en la variable guardada imprime un mensaje
+            noms=[]
+            if "_embedded" not in contenido:
+                mensaje=("No hay eventos para esa búsqueda")
+                return render_template("index.html",mensaje=mensaje,palabra_clave=palabra_clave,paises=lista_paises)
             else:
-                #devuelve el filtro
-                return render_template("index.html", filtro=(ev_artista(artista)))
+			    #Creamos las listas que necesitamos
+                nombres=[]
+                fechas=[]
+                horas=[]
+                salas=[]
+                direccion=[]
+                ciudades=[]
+                paises=[]
+                urls=[]
+                urls_sala=[]
+    
+                for elem in contenido["_embedded"]["events"]:
+                    #NOMBRES
+                    nombres.append(elem["name"])
+                    #CIUDADES
+                    ciudades.append(elem["_embedded"]["venues"][0]["city"]["name"])
+                    #PAISES
+                    paises.append(elem["_embedded"]["venues"][0]["country"]["name"])
+                    #SALAS
+                    if "name" in elem["_embedded"]["venues"][0]:
+                        salas.append(elem["_embedded"]["venues"][0]["name"])
+                    else:
+                        salas.append("NO ESPECIFICADA")
+                    #DIRECCIONES
+                    if "address" in elem["_embedded"]["venues"][0]:
+                        direccion.append(elem["_embedded"]["venues"][0]["address"]["line1"])
+                    else:
+                        direccion.append("NO ESPECIFICADA")
+                    #FECHAS
+                    fechas.append(elem["dates"]["start"]["localDate"])
+                    #HORAS: A veces la hora no esta especificada así que nos aseguramos de ello.
+                    if "localTime" in elem["dates"]["start"]:
+                        horas.append(elem["dates"]["start"]["localTime"])
+                    else:
+                        horas.append("NO ESPECIFICADA")
+                    #URLS
+                    urls.append(elem["url"])
+                    urls_sala.append(elem["_embedded"]["venues"][0]["url"])
+                filtro=zip(nombres,paises,ciudades,salas,direccion,fechas,horas,urls,urls_sala)
+                return render_template("index.html",filtro=filtro,palabra_clave=palabra_clave,paises=lista_paises)
     else:
         abort(404)
 
-#Probar en el entorno de desarrollo
-app.run(debug=True)
 
-#Para desplegar en heroku		
-#port=os.environ["PORT"]
-#app.run('0.0.0.0', int(port), debug=False)
+app.run(debug=True)
