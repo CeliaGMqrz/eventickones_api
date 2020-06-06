@@ -357,7 +357,7 @@ th, td {
 }
 
 .column1 {
-  width: 35%;
+  width: 27%;
   padding-left: 40px;
 }
 
@@ -366,11 +366,11 @@ th, td {
 }
 
 .column3 {
-  width: 22%;
+  width: 13%;
 }
 
 .column4 {
-  width: 19%;
+  width: 15%;
 }
 
 .column5 {
@@ -378,8 +378,8 @@ th, td {
 }
 
 .table100-head th {
-  padding-top: 16px;
-  padding-bottom: 16px;
+  padding-top: 13px;
+  padding-bottom: 15px;
 }
 
 .table100-body td {

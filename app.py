@@ -90,12 +90,12 @@ def eventos():
                     if "name" in elem["_embedded"]["venues"][0]:
                         salas.append(elem["_embedded"]["venues"][0]["name"])
                     else:
-                        salas.append("NO ESPECIFICADA")
+                        salas.append("-")
                     #DIRECCIONES
                     if "address" in elem["_embedded"]["venues"][0]:
                         direccion.append(elem["_embedded"]["venues"][0]["address"]["line1"])
                     else:
-                        direccion.append("NO ESPECIFICADA")
+                        direccion.append("-")
                     #FECHAS CON CAMBIO DE FORMATO
                     fechas.append(elem["dates"]["start"]["localDate"])
                     for fecha in fechas:
@@ -106,7 +106,7 @@ def eventos():
                     if "localTime" in elem["dates"]["start"]:
                         horas.append(elem["dates"]["start"]["localTime"])
                     else:
-                        horas.append("NO ESPECIFICADA")
+                        horas.append("-")
                     #URLS
                     urls.append(elem["url"])
                     if elem["url"]:
@@ -114,7 +114,7 @@ def eventos():
                     if "url" in elem["_embedded"]["venues"][0]:
                         urls_sala.append(elem["_embedded"]["venues"][0]["url"])
                     else:
-                        urls_sala.append("NO ESPECIFICADA")
+                        urls_sala.append("-")
                         
                 filtro=zip(nombres,paises,ciudades,salas,direccion,fecha_str,horas,urls,urls_sala)
                 
