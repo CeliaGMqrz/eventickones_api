@@ -29,6 +29,7 @@ def eventos():
     palabra_clave=request.form.get("artista")
     #Cogemos el país seleccionado en el formulario
     pais=request.form.get("pais")
+    #Inicializamos la paginas:
     #Creamos el diccionario con los parámetros necesarios
     payload = {'apikey':key,'keyword':palabra_clave,'countryCode':pais}
     #Guardamos la petición en una variable(urlbase + diccionario con parametros)
@@ -191,7 +192,6 @@ def detallevento(identificador):
         filtro=zip(nombres,paises,ciudades,salas,direccion,fecha_str,horas,urls,urls_sala)
         return render_template("detalle_eventos.html",filtro=filtro)
 
-
-
-
-app.run(debug=True)
+#Entorno de producción
+port=os.environ["PORT"]
+app.run('0.0.0.0', int(port), debug=False)
